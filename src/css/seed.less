@@ -1,0 +1,73 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+@import "seattletimes";
+
+body {
+  max-width: 630px;
+  font-family: @df-sans;
+}
+
+.outmost {
+  border-top: 1px solid @df-border-gray;
+  border-bottom: 1px solid @df-border-gray;
+  padding: 20px 0;
+  margin: 20px 0;
+}
+
+.container {
+  max-width: 420px;
+  margin: auto;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 28px;
+  text-align: center;
+  padding-bottom: 5px;
+}
+
+.chatter {
+  font-size: 14px;
+  padding-bottom: 15px;
+  font-family: @df-serif;
+}
+
+.aspect-ratio-outer {
+  margin: auto;
+  position: relative;
+
+  @media @mobile {
+    width: 100%;
+    padding: 0 30px;
+  }
+
+  .aspect-ratio-inner {
+    padding-bottom: percentage(10/7);
+    position: relative;
+  }
+
+  leaflet-map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    &:not([ready]) {
+      display: none;
+    }
+  }
+}
+
+.source {
+  padding-top: 10px;
+}
+.source, .credit {
+  font-size: 11.5px;
+  color: @df-middle-gray;
+}
