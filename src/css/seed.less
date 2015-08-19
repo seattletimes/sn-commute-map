@@ -79,7 +79,7 @@ body {
       border-radius: 50%;
       width: 24px !important;
       height: 24px !important;
-      margin-left: -12px !important;
+      margin-left: -14px !important;
       text-align: center;
       line-height: 22px;
     }
@@ -92,7 +92,7 @@ body {
 
   .stop {
     font-size: 12px;
-    border-left: 3px solid #4abe9d;
+    border-left: 4px solid #4abe9d;
     margin-left: 30px;
     padding-left: 15px;
     padding-bottom: 8px;
@@ -100,7 +100,24 @@ body {
 
     &.last {
       border: none;
-      border-left: 3px solid white;
+      border-left: 4px solid white;
+    }
+
+    &.line {
+      .dot {
+        background: white;
+        border: 4px solid #4abe9d;
+      }
+    }
+    &.current {
+      font-weight: bold;
+      font-size: 13px;
+      .time {
+        font-weight: normal;
+      }
+      .dot {
+        background: #f57d20;
+      }
     }
 
     .dot {
@@ -108,7 +125,7 @@ body {
       left: -12px;
       height: 20px;
       width: 20px;
-      background: #f57d20;
+      background: #644c9f;
       border-radius: 50%;
       color: white;
       text-align: center;

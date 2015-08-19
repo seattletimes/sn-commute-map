@@ -25,7 +25,7 @@ var drawLine = function(location1, location2) {
 
   var polyline = new L.Polyline(pointList, {
   color: '#4abe9d',
-  weight: 3,
+  weight: 4,
   opacity: 1,
   smoothFactor: 1
 

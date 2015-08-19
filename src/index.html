@@ -34,7 +34,7 @@
 
           <div class="timeline">
             <% csv.timeline.forEach(function(stop, i) { %>
-              <div class="stop <%= stop.last ? 'last' : ''%> <%= !i ? 'current' : '' %>" data-poi="<%=stop.letter %>">
+              <div class="stop <%=stop.type%> <%= stop.last ? 'last' : ''%> <%= !i ? 'current' : '' %>" data-poi="<%=stop.letter %>">
                 <div class="dot"><%=stop.label%></div>
                 <div class="time"><%= stop.time %></div>
                 <div class="description"><%= stop.description %></div>
