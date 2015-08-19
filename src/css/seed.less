@@ -25,17 +25,25 @@ body {
   font-size: 28px;
   text-align: center;
   padding-bottom: 5px;
+
+  @media @mobile {
+    font-size: 26px;
+  }
 }
 
 .chatter {
   font-size: 14px;
+  padding-bottom: 15px;
 }
 
 .controls {
   text-align: center;
   font-size: 22px;
-  padding-top: 10px;
-  padding-bottom: 12px;
+  padding-top: 15px;
+
+  @media @break {
+    padding-top: 8px;
+  }
 
   .fa {
     cursor: pointer;
@@ -55,14 +63,27 @@ body {
 
 .container {
   .display-flex();
+
+  @media @break {
+    display: block;
+  }
 }
 
 .map-container {
   max-width: 360px;
 
+  @media @break {
+    margin: auto;
+  }
+
   .aspect-ratio-outer {
     position: relative;
     .flex(1);
+
+    @media @mobile {
+      width: 75%;
+      margin: auto;
+    }
 
     .aspect-ratio-inner {
       padding-bottom: percentage(10/7);
@@ -81,6 +102,10 @@ body {
       }
     }
 
+    leaflet-map, .leaflet-clickable {
+      cursor: default;
+    }
+
     .leaflet-marker-icon {
       background: #644c9f !important;
       color: white;
@@ -93,25 +118,43 @@ body {
 
       &.active {
         background: #f57d20 !important;
+        border: 1px solid #f57d20;
       }
     }
   }
 }
 
 .timeline {
-  display: inline-block;
   max-width: 270px;
+  padding-top: 8px;
+
+  @media @break {
+    max-width: 360px;
+    width: 75%;
+    margin: auto;
+    padding-top: 0;
+  }
 
   .stop {
     font-size: 12px;
     border-left: 4px solid #4abe9d;
     margin-left: 30px;
-    padding-left: 15px;
+    padding-left: 20px;
     padding-bottom: 8px;
     position: relative;
 
+    @media @break {
+      display: none;
+      border: none;
+      margin-left: 12px;
+    }
+
     &:hover {
       cursor: pointer;
+
+      @media @break {
+        cursor: default;
+      }
 
       .description, .time {
         font-weight: bold;
@@ -131,8 +174,14 @@ body {
       .dot {
         background: white;
         border: 4px solid #4abe9d;
+
+        @media @break {
+          border-color: #f57d20;
+          background: white !important;
+        }
       }
     }
+
     &.current {
       .description, .time {
         font-weight: bold;
@@ -143,6 +192,18 @@ body {
       }
       .dot {
         background: #f57d20;
+      }
+
+      @media @break {
+        display: block;
+
+        .description {
+          font-weight: normal;
+          font-style: normal;
+        }
+        .dot {
+          background: #f57d20;
+        }
       }
     }
 
@@ -170,4 +231,16 @@ body {
 .source, .credit {
   font-size: 11.5px;
   color: @df-middle-gray;
+
+  @media @break {
+    display: none;
+  }
+}
+
+.mobile.source, .mobile.credit {
+  display: none;
+
+  @media @break {
+    display: block;
+  }
 }
