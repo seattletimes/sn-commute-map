@@ -5,29 +5,49 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <%= t.include("partials/_adHead.html") %>
   </head>
   <body>
 
     <responsive-child>
-      <div class="outmost">
-        <div class="container">
-          <div class="title">Simon Nakhale's commute</div>
-          <div class="chatter">A typical workday for Simon Nakhale starts at 1:40 a.m. and involves about three hours of commuting.</div>
+      <div class="outmost"> 
 
-          <div class="aspect-ratio-outer">
-            <div class="aspect-ratio-inner">
-              <leaflet-map lat="47.51" lng="-122.211" zoom=10>
-                <tile-layer layer="cartoPositron"></tile-layer>
-              </leaflet-map>
+        <div class="container">
+          <div class="map-container">
+            <div class="title">Simon Nakhale’s commute</div>
+            <div class="chatter">A typical workday for Simon Nakhale starts at 1:40 a.m. and involves about three hours of commuting.</div>
+
+            <div class="controls">
+              <i class="fa left fa-arrow-left"></i>
+              <i class="fa right fa-arrow-right"></i>
+            </div>
+
+            <div class="aspect-ratio-outer">
+              <div class="aspect-ratio-inner">
+                <leaflet-map lat="47.46" lng="-122.25" zoom=10>
+                  <tile-layer layer="cartoPositron"></tile-layer>
+                </leaflet-map>
+              </div>
             </div>
           </div>
 
-          <div class="source"><em>
-            Source: Simon Nakhale</em>
+          <div class="timeline">
+            <% csv.timeline.forEach(function(stop, i) { %>
+              <div class="stop <%= stop.last ? 'last' : ''%> <%= !i ? 'current' : '' %>" data-poi="<%=stop.letter %>">
+                <div class="dot"><%=stop.label%></div>
+                <div class="time"><%= stop.time %></div>
+                <div class="description"><%= stop.description %></div>
+              </div>
+            <% }) %>
           </div>
-          <div class="credit">AUDREY CARLSEN / THE SEATTLE TIMES</div>
         </div>
+
+        <div class="source"><em>
+          Source: Simon Nakhale</em>
+        </div>
+        <div class="credit">AUDREY CARLSEN / THE SEATTLE TIMES</div>
+
       </div>
     </responsive-child>
 

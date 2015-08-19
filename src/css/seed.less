@@ -6,6 +6,7 @@
 }
 
 @import "seattletimes";
+@import "flexbox";
 
 body {
   max-width: 630px;
@@ -19,11 +20,6 @@ body {
   margin: 20px 0;
 }
 
-.container {
-  max-width: 420px;
-  margin: auto;
-}
-
 .title {
   font-weight: bold;
   font-size: 28px;
@@ -33,33 +29,94 @@ body {
 
 .chatter {
   font-size: 14px;
-  padding-bottom: 15px;
-  font-family: @df-serif;
 }
 
-.aspect-ratio-outer {
-  margin: auto;
-  position: relative;
+.controls {
+  text-align: center;
+  font-size: 22px;
+  padding-top: 10px;
+  padding-bottom: 12px;
 
-  @media @mobile {
-    width: 100%;
-    padding: 0 30px;
+  .fa.left {
+    margin-right: 10px;
   }
+  .fa.right {
+    margin-left: 10px;
+  }
+}
 
-  .aspect-ratio-inner {
-    padding-bottom: percentage(10/7);
+.container {
+  .display-flex();
+}
+
+.map-container {
+  max-width: 360px;
+
+  .aspect-ratio-outer {
     position: relative;
+    .flex(1);
+
+    .aspect-ratio-inner {
+      padding-bottom: percentage(10/7);
+      position: relative;
+    }
+
+    leaflet-map {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+
+      &:not([ready]) {
+        display: none;
+      }
+    }
+
+    .leaflet-marker-icon {
+      background: #644c9f !important;
+      color: white;
+      border-radius: 50%;
+      width: 24px !important;
+      height: 24px !important;
+      margin-left: -12px !important;
+      text-align: center;
+      line-height: 22px;
+    }
   }
+}
 
-  leaflet-map {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+.timeline {
+  display: inline-block;
+  max-width: 270px;
 
-    &:not([ready]) {
-      display: none;
+  .stop {
+    font-size: 12px;
+    border-left: 3px solid #4abe9d;
+    margin-left: 30px;
+    padding-left: 15px;
+    padding-bottom: 8px;
+    position: relative;
+
+    &.last {
+      border: none;
+      border-left: 3px solid white;
+    }
+
+    .dot {
+      position: absolute;
+      left: -12px;
+      height: 20px;
+      width: 20px;
+      background: #f57d20;
+      border-radius: 50%;
+      color: white;
+      text-align: center;
+      line-height: 22px;
+    }
+
+    .time {
+      font-weight: bold;
     }
   }
 }

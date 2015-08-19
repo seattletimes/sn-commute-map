@@ -12,10 +12,10 @@ var map = mapElement.map;
 map.scrollWheelZoom.disable();
 
 var coordinates = {
-  westseattle: [47.54617, -122.3744114],
-  downtown: [47.61442, -122.3439376],
-  home: [47.450451, -122.1607646],
-  auburn: [47.2956455, -122.2048925]
+  A: [47.45, -122.16],
+  B: [47.34, -122.22],
+  C: [47.61, -122.34],
+  D: [47.56, -122.37]
 }
 
 var drawLine = function(location1, location2) {
@@ -23,23 +23,49 @@ var drawLine = function(location1, location2) {
   var pointB = new L.LatLng(location2[0],location2[1]);
   var pointList = [pointA, pointB];
 
-  var firstpolyline = new L.Polyline(pointList, {
+  var polyline = new L.Polyline(pointList, {
   color: '#4abe9d',
   weight: 3,
   opacity: 1,
   smoothFactor: 1
 
   });
-  firstpolyline.addTo(map);
+  polyline.addTo(map);
+  return polyline;
 }
 
-drawLine(coordinates.westseattle, coordinates.downtown);
-drawLine(coordinates.home, coordinates.downtown);
-drawLine(coordinates.home, coordinates.auburn);
+var poi = {
+  CD: drawLine(coordinates.D, coordinates.C),
+  AC: drawLine(coordinates.A, coordinates.C),
+  AB: drawLine(coordinates.A, coordinates.B)
+};
 
 for (var location in coordinates) {
-  L.circle([coordinates[location][0],coordinates[location][1]], 500, {
-    color: '#524fa2',
-    fillOpacity: 1
+  poi[location] = L.marker([coordinates[location][0],coordinates[location][1]], {
+    icon: L.divIcon({
+      html: location
+    })
   }).addTo(map);
 };
+
+var current = 0;
+
+var onClick = function() {
+  var current = document.querySelector(".current");
+  var go;
+  if (this.classList.contains("left") ) {
+    go = current.previousElementSibling;
+  } else {
+    go = current.nextElementSibling;
+  }
+  if (!go) return;
+  current.classList.remove("current");
+  go.classList.add("current");
+  console.log(go.getAttribute("data-poi"));
+};
+
+var buttons = document.querySelectorAll(".controls .fa");
+for (var i = 0; i < buttons.length; i++) {
+  var button = buttons[i];
+  button.addEventListener("click", onClick);
+}
