@@ -110,6 +110,18 @@ body {
     padding-bottom: 8px;
     position: relative;
 
+    &:hover {
+      cursor: pointer;
+
+      .description, .time {
+        font-weight: bold;
+        font-size: 13px;
+      }
+      .description {
+        font-style: italic;
+      }
+    }
+
     &.last {
       border: none;
       border-left: 4px solid white;

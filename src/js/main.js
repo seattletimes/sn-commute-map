@@ -5,7 +5,7 @@
 require("component-responsive-frame/child");
 require("component-leaflet-map");
 
-var data = require("./censusData.geo.json");
+// var data = require("./censusData.geo.json");
 
 var mapElement = document.querySelector("leaflet-map");
 var L = mapElement.leaflet;
@@ -13,28 +13,28 @@ var map = mapElement.map;
 
 map.scrollWheelZoom.disable();
 
-function getColor(d) {
-  return d > 0.09 ? '#006837' :
-         d > 0.06 ? '#1a9850' :
-         d > 0.03 ? '#66bd63' :
-         d > 0.01 ? '#a6d96a' :
-         d > 0 ?    '#d9ef8b' :
-         d > -.01 ? '#fee08b' :
-         d > -.03 ? '#fdae61' :
-         d > -.06 ? '#f46d43' :
-         d > -.09 ? '#d73027' :
-                    '#a50026' ;
-}
+// function getColor(d) {
+//   return d > 0.09 ? '#006837' :
+//          d > 0.06 ? '#1a9850' :
+//          d > 0.03 ? '#66bd63' :
+//          d > 0.01 ? '#a6d96a' :
+//          d > 0 ?    '#d9ef8b' :
+//          d > -.01 ? '#fee08b' :
+//          d > -.03 ? '#fdae61' :
+//          d > -.06 ? '#f46d43' :
+//          d > -.09 ? '#d73027' :
+//                     '#a50026' ;
+// }
 
-function style(feature) {
-  return {
-    fillColor: getColor(feature.properties.jobschange),
-    weight: 0,
-    fillOpacity: 0.25
-  };
-}
+// function style(feature) {
+//   return {
+//     fillColor: getColor(feature.properties.jobschange),
+//     weight: 0,
+//     fillOpacity: 0.25
+//   };
+// }
 
-L.geoJson(data, {style: style}).addTo(map);
+// L.geoJson(data, {style: style}).addTo(map);
 
 var coordinates = {
   A: [47.45, -122.16],
@@ -73,15 +73,7 @@ for (var location in coordinates) {
   }).addTo(map);
 };
 
-var onClick = function() {
-  var current = document.querySelector(".current");
-  var go;
-  if (this.classList.contains("left") ) {
-    go = current.previousElementSibling;
-  } else {
-    go = current.nextElementSibling;
-  }
-  if (!go) return;
+var onClick = function(current, go) {
   current.classList.remove("current");
   go.classList.add("current");
 
@@ -107,5 +99,26 @@ var onClick = function() {
 var buttons = document.querySelectorAll(".controls .fa");
 for (var i = 0; i < buttons.length; i++) {
   var button = buttons[i];
-  button.addEventListener("click", onClick);
+  button.addEventListener("click", function(){
+    var current = document.querySelector(".current");
+    var go;
+    if (this.classList.contains("left") ) {
+      go = current.previousElementSibling;
+    } else {
+      go = current.nextElementSibling;
+    }
+    if (!go) return;
+    onClick(current, go);
+  })
+}
+
+var stops = document.querySelectorAll(".timeline .stop");
+for (var i = 0; i < stops.length; i++) {
+  var stop = stops[i];
+
+  stop.addEventListener("click", function(e) {
+    var current = document.querySelector(".current");
+    var go = e.target.closest(".stop");
+    onClick(current, go);
+  });
 }
