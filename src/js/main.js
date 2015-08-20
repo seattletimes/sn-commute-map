@@ -46,6 +46,31 @@ for (var location in coordinates) {
   }).addTo(map);
 };
 
+L.marker([47.5, -122.14], {
+  icon: L.divIcon({
+    html: "<div class='map-label home'><strong>Nakhale's home</strong></div>"
+  })
+}).addTo(map);
+
+L.marker([47.35, -122.34], {
+  icon: L.divIcon({
+    html: "<div class='map-label home'><strong>First job:</strong><br><em>FedEx Ground</em></div>"
+  })
+}).addTo(map);
+
+L.marker([47.65, -122.3], {
+  icon: L.divIcon({
+    html: "<div class='map-label home'><strong>Second job:</strong><br><em>Downtown Key Bank</em></div>"
+  })
+}).addTo(map);
+
+L.marker([47.53, -122.43], {
+  icon: L.divIcon({
+    html: "<div class='map-label home'><em>or West Seattle Key Bank</em></div>"
+  })
+}).addTo(map);
+
+
 poi['A']._icon.classList.add("active");
 
 var onClick = function(current, go) {
