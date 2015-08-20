@@ -46,30 +46,55 @@ for (var location in coordinates) {
   }).addTo(map);
 };
 
-L.marker([47.5, -122.14], {
-  icon: L.divIcon({
-    html: "<div class='map-label home'><strong>Nakhale's home</strong></div>"
-  })
-}).addTo(map);
+if (window.matchMedia && window.matchMedia("(max-width: 480px)").matches) {
+  L.marker([47.5, -122.17], {
+    icon: L.divIcon({
+      html: "<div class='map-label home'><strong>Nakhale's home</strong></div>"
+    })
+  }).addTo(map);
 
-L.marker([47.35, -122.34], {
-  icon: L.divIcon({
-    html: "<div class='map-label home'><strong>First job:</strong><br><em>FedEx Ground</em></div>"
-  })
-}).addTo(map);
+  L.marker([47.37, -122.35], {
+    icon: L.divIcon({
+      html: "<div class='map-label first'><strong>First job:</strong><br><em>FedEx Ground</em></div>"
+    })
+  }).addTo(map);
 
-L.marker([47.65, -122.3], {
-  icon: L.divIcon({
-    html: "<div class='map-label home'><strong>Second job:</strong><br><em>Downtown Key Bank</em></div>"
-  })
-}).addTo(map);
+  L.marker([47.6, -122.29], {
+    icon: L.divIcon({
+      html: "<div class='map-label second'><strong>Second job:</strong><br><em>Downtown Key Bank</em></div>"
+    })
+  }).addTo(map);
 
-L.marker([47.53, -122.43], {
-  icon: L.divIcon({
-    html: "<div class='map-label home'><em>or West Seattle Key Bank</em></div>"
-  })
-}).addTo(map);
+  L.marker([47.53, -122.39], {
+    icon: L.divIcon({
+      html: "<div class='map-label alt'><em>or West Seattle Key Bank</em></div>"
+    })
+  }).addTo(map);
+} else {
+  L.marker([47.5, -122.14], {
+    icon: L.divIcon({
+      html: "<div class='map-label home'><strong>Nakhale's home</strong></div>"
+    })
+  }).addTo(map);
 
+  L.marker([47.35, -122.35], {
+    icon: L.divIcon({
+      html: "<div class='map-label first'><strong>First job:</strong><br><em>FedEx Ground</em></div>"
+    })
+  }).addTo(map);
+
+  L.marker([47.65, -122.3], {
+    icon: L.divIcon({
+      html: "<div class='map-label second'><strong>Second job:</strong><br><em>Downtown Key Bank</em></div>"
+    })
+  }).addTo(map);
+
+  L.marker([47.53, -122.43], {
+    icon: L.divIcon({
+      html: "<div class='map-label alt'><em>or West Seattle Key Bank</em></div>"
+    })
+  }).addTo(map);
+};
 
 poi['A']._icon.classList.add("active");
 
@@ -100,15 +125,32 @@ var buttons = document.querySelectorAll(".controls .fa");
 for (var i = 0; i < buttons.length; i++) {
   var button = buttons[i];
 
-  button.addEventListener("click", function(){
+  button.addEventListener("click", function(e){
     var current = document.querySelector(".current");
     var go;
+
+    if (e.target.classList.contains("disabled")) return;
+
+    if (document.querySelector(".disabled")) {
+      document.querySelector(".disabled").classList.remove("disabled");
+    }
+
     if (this.classList.contains("left") ) {
       go = current.previousElementSibling;
+      if (!go) {
+        return;
+      } else if (!go.previousElementSibling) {
+        e.target.classList.add("disabled");
+      }
     } else {
       go = current.nextElementSibling;
+      if (!go) {
+        return;
+      } else if (!go.nextElementSibling) {
+        e.target.classList.add("disabled");
+      }
     }
-    if (!go) return;
+
     onClick(current, go);
   });
 }

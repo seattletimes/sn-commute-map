@@ -38,7 +38,7 @@ body {
 
 .controls {
   text-align: center;
-  font-size: 22px;
+  font-size: 26px;
   padding-top: 15px;
 
   @media @break {
@@ -50,6 +50,15 @@ body {
 
     &:hover {
       color: #f57d20;
+    }
+
+    &.disabled {
+      color: @df-light-gray;
+      cursor: default;
+
+      &:hover {
+        color: @df-light-gray;
+      }
     }
   }
 
@@ -81,7 +90,7 @@ body {
     .flex(1);
 
     @media @mobile {
-      width: 75%;
+      width: 80%;
       margin: auto;
     }
 
@@ -123,13 +132,25 @@ body {
 
       .map-label {
         color: black;
-        width: 75px;
         background: white;
         border-radius: 0;
         font-family: @df-sans;
         border: 1px solid @df-border-gray;
         padding: 4px;
         line-height: 16px;
+
+        &.home {
+          width: 65px;
+        }
+        &.first {
+          width: 85px;
+        }
+        &.second {
+          width: 115px;
+        }
+        &.alt {
+          width: 90px;
+        }
       }
     }
   }
