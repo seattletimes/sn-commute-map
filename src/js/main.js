@@ -121,7 +121,7 @@ var onClick = function(current, go) {
   }
 };
 
-var buttons = document.querySelectorAll(".controls .fa");
+var buttons = document.querySelectorAll(".controls .button");
 for (var i = 0; i < buttons.length; i++) {
   var button = buttons[i];
 
@@ -160,8 +160,15 @@ for (var i = 0; i < stops.length; i++) {
   var stop = stops[i];
 
   stop.addEventListener("click", function(e) {
+    document.querySelector(".controls .button.right").classList.remove("disabled");
+    document.querySelector(".controls .button.left").classList.remove("disabled");
     var current = document.querySelector(".current");
     var go = e.target.closest(".stop");
+    if (!go.previousElementSibling) {
+      document.querySelector(".controls .button.left").classList.add("disabled");
+    } else if (!go.nextElementSibling) {
+      document.querySelector(".controls .button.right").classList.add("disabled");
+    }
     onClick(current, go);
   });
 }

@@ -38,35 +38,33 @@ body {
 
 .controls {
   text-align: center;
-  font-size: 26px;
   padding-top: 15px;
 
   @media @break {
     padding-top: 8px;
   }
 
-  .fa {
+  .button {
     cursor: pointer;
+    color: @df-off-white;
+    font-size: 12px;
+    display: inline-block;
+    padding: 5px 8px;
+    background: #644c9f;
 
     &:hover {
-      color: #f57d20;
+      background: #f57d20;
     }
 
     &.disabled {
-      color: @df-light-gray;
+      background: @df-light-gray;
       cursor: default;
+      color: @df-middle-gray;
 
       &:hover {
-        color: @df-light-gray;
+        background: @df-light-gray;
       }
     }
-  }
-
-  .fa.left {
-    margin-right: 10px;
-  }
-  .fa.right {
-    margin-left: 10px;
   }
 }
 
