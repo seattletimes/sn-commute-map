@@ -178,7 +178,7 @@ for (var i = 0; i < stops.length; i++) {
     document.querySelector(".controls .button.right").classList.remove("disabled");
     document.querySelector(".controls .button.left").classList.remove("disabled");
     var current = document.querySelector(".current");
-    var go = e.target.closest(".stop");
+    var go = e.currentTarget;
     if (!go.previousElementSibling) {
       document.querySelector(".controls .button.left").classList.add("disabled");
     } else if (!go.nextElementSibling) {

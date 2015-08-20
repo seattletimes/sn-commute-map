@@ -5,8 +5,8 @@
       "path": "changeable-quadrangle"
     },
     "live": {
-      "bucket": "",
-      "path": ""
+      "bucket": "projects.seattletimes.com",
+      "path": "2015/business/nakhale-commute"
     }
   },
   "title": "",
