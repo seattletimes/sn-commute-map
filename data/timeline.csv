@@ -1,10 +1,10 @@
 type,letter,label,time,description,last
 dot,A,A,1:40 a.m.,Nakhale wakes up in his home in the Fairwood/Cascade area near Renton
-line,AB,,2:25 a.m.,Leaves home to drive to his first job
+line,A AB,,2:25 a.m.,Leaves home to drive to his first job
 dot,B,B,2:50 a.m.,Arrives at FedEx Ground to start his 3 a.m. shift
 dot,A,A,6:40 a.m.,FedEx shift ends and Nakhale drives home to freshen up
-line,AC,,7:30 a.m.,Nakhale and a neighbor leave to drive to work in downtown Seattle. (The neighbor drives Nakhale's car.)
+line,A AC,,7:30 a.m.,Nakhale and a neighbor leave to drive to work in downtown Seattle. (The neighbor drives Nakhale's car.)
 dot,C,C,8:25 a.m.,Nakhale arrives at his second job at Key Bank
 dot,D,D,8:45 a.m.,"On some weeks, Nakhale works at a Key Bank branch in West Seattle. On those days, he drops his neighbor off in downtown Seattle, and Nakhale goes on to drive to West Seattle"
-line,AC,,5 p.m.,Nakhale's shift at the bank ends; he and his neighbor drive home
+line,C AC,,5 p.m.,Nakhale's shift at the bank ends; he and his neighbor drive home
 dot,A,A,6:25 p.m.,"Nakhale arrives home, eats supper. (On days when he's working in West Seattle, and picks up his neighbor in downtown Seattle before heading home, he gets home at about 6:45 p.m.) He heads to bed at 7:30 p.m.",true

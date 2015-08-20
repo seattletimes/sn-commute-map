@@ -41,55 +41,57 @@ var poi = {
 for (var location in coordinates) {
   poi[location] = L.marker([coordinates[location][0],coordinates[location][1]], {
     icon: L.divIcon({
-      html: location
+      html: `<div class="map-marker">${location}</div>`
     })
   }).addTo(map);
 };
 
+var labels = {};
+
 if (window.matchMedia && window.matchMedia("(max-width: 480px)").matches) {
-  L.marker([47.5, -122.17], {
+  labels["A"] = L.marker([47.5, -122.17], {
     icon: L.divIcon({
       html: "<div class='map-label home'><strong>Nakhale's home</strong></div>"
     })
   }).addTo(map);
 
-  L.marker([47.37, -122.35], {
+  labels["B"] = L.marker([47.37, -122.35], {
     icon: L.divIcon({
       html: "<div class='map-label first'><strong>First job:</strong><br><em>FedEx Ground</em></div>"
     })
   }).addTo(map);
 
-  L.marker([47.6, -122.29], {
+  labels["C"] = L.marker([47.6, -122.29], {
     icon: L.divIcon({
       html: "<div class='map-label second'><strong>Second job:</strong><br><em>Downtown Key Bank</em></div>"
     })
   }).addTo(map);
 
-  L.marker([47.53, -122.39], {
+  labels["D"] = L.marker([47.53, -122.39], {
     icon: L.divIcon({
       html: "<div class='map-label alt'><em>or West Seattle Key Bank</em></div>"
     })
   }).addTo(map);
 } else {
-  L.marker([47.5, -122.14], {
+  labels["A"] = L.marker([47.5, -122.14], {
     icon: L.divIcon({
       html: "<div class='map-label home'><strong>Nakhale's home</strong></div>"
     })
   }).addTo(map);
 
-  L.marker([47.35, -122.35], {
+  labels["B"] = L.marker([47.35, -122.35], {
     icon: L.divIcon({
       html: "<div class='map-label first'><strong>First job:</strong><br><em>FedEx Ground</em></div>"
     })
   }).addTo(map);
 
-  L.marker([47.65, -122.3], {
+  labels["C"] = L.marker([47.65, -122.3], {
     icon: L.divIcon({
       html: "<div class='map-label second'><strong>Second job:</strong><br><em>Downtown Key Bank</em></div>"
     })
   }).addTo(map);
 
-  L.marker([47.53, -122.43], {
+  labels["D"] = L.marker([47.53, -122.43], {
     icon: L.divIcon({
       html: "<div class='map-label alt'><em>or West Seattle Key Bank</em></div>"
     })
@@ -97,28 +99,41 @@ if (window.matchMedia && window.matchMedia("(max-width: 480px)").matches) {
 };
 
 poi['A']._icon.classList.add("active");
+labels['A']._icon.classList.add("highlighted");
 
 var onClick = function(current, go) {
   current.classList.remove("current");
   go.classList.add("current");
 
-  var currentId = current.getAttribute("data-poi");
+  var currentIds = current.getAttribute("data-poi").split(" ");
 
-  var currentStop = poi[currentId];
-  if (currentStop instanceof L.Marker) {
-    currentStop._icon.classList.remove("active");
-  } else {
-    currentStop.setStyle({color: "#4abe9d"});
+  if (currentIds.length == 1) {
+    labels[currentIds[0]]._icon.classList.remove("highlighted");
   }
 
-  var goId = go.getAttribute("data-poi");
+  currentIds.forEach(function(id) {
+    var currentStop = poi[id];
+    if (currentStop instanceof L.Marker) {
+      currentStop._icon.classList.remove("active");
+    } else {
+      currentStop.setStyle({color: "#4abe9d"});
+    }
+  })
 
-  var stop = poi[goId];
-  if (stop instanceof L.Marker) {
-    stop._icon.classList.add("active");
-  } else {
-    stop.setStyle({color: "#f57d20"});
+  var goIds = go.getAttribute("data-poi").split(" ");
+
+  if (goIds.length == 1) {
+    labels[goIds[0]]._icon.classList.add("highlighted");
   }
+
+  goIds.forEach(function(id) {
+    var stop = poi[id];
+    if (stop instanceof L.Marker) {
+      stop._icon.classList.add("active");
+    } else {
+      stop.setStyle({color: "#f57d20"});
+    }
+  });
 };
 
 var buttons = document.querySelectorAll(".controls .button");
